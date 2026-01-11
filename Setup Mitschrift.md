@@ -3,7 +3,7 @@
 Idee: Automatisierung?
 
 Server VM aufgesetzt, name auf DC01 gesetzt, neustart.
-IP festgelegt, DNS vorerst ROlle installiert.
+IP festgelegt, DNS Rolle installiert.
 Auf Domaincontroller hochgestuft.
 RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar.
 Powershell 7 per Skript auf VM Installiert
