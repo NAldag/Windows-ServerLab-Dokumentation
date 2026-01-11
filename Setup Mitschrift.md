@@ -1,6 +1,11 @@
-Server VM aufgesetzt, name auf DC01 gesetzt, neustart  
-IP festgelegt, DNS vorerst .1
-RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar
+## Ersteinrichtung in GUI
+
+Idee: Automatisierung?
+
+Server VM aufgesetzt, name auf DC01 gesetzt, neustart.
+IP festgelegt, DNS vorerst ROlle installiert.
+Auf Domaincontroller hochgestuft.
+RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar.
 Powershell 7 per Skript auf VM Installiert
 
 ## SSH für Powershell(ISE)
