@@ -3,6 +3,8 @@
 # Version 7.5.4
 # ----------------------------------------
 
+# To-do: Modifizieren als allgemeines Template für Installs
+
 # Versionsnummer und URLs
 $pwshVersion = "7.5.4"
 $msiUrl = "https://github.com/PowerShell/PowerShell/releases/download/v$pwshVersion/PowerShell-7.5.4-win-x64.msi"
