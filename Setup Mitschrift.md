@@ -1,6 +1,7 @@
 Server VM aufgesetzt, name auf DC01 gesetzt, neustart  
 IP festgelegt, DNS vorerst .1
 RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar
+Powershell 7 per Skript auf VM Installiert
 
 ## SSH für Powershell(ISE)
 
@@ -53,8 +54,14 @@ STRG/SHIFT + P Terminal: Set Default Profile
 Falls VS Code meldet, dass es nicht in die settings.json schreiben kann
 >Syntaxfehler in settings.json hat sich bei letzter Änderung reingeschlichen: Fehlende "{"
 
+Enter-PSSession -HostName 192.168.204.10 -UserName Administrator Administrator@192.168.204.10's password: subsystem request failed on channel 0
 
+SSH Subsystem für Powershell einrichten:
+notepad C:\ProgramData\ssh\sshd_config
+Eintragen:
+Subsystem powershell "C:\Program Files\PowerShell\7\pwsh.exe" -sshs -NoLogo -NoProfile
 
+SSH & Enter-PSSession test: OK
 
 ```shell
 
