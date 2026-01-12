@@ -122,15 +122,12 @@ Im Skript z. B. als Schleife mit Abfrage, ob OU existiert:
 
 $BaseDN = "DC=HomeLab,DC=local"
 $OUs = @("Users,Computers,Groups,Service")
+$ExistingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase $BaseDN | Select-Object -ExpandProperty Name
 
 foreach ($OU in $OUs){
-
-  $OUDN = "OU?$OU,$BaseDN"
-
-  if (-not (GetAdorganizationalUnit -Filter "DistinguishedName -eq '$OUdn'" -ErrorAction SilentlyContinue)) {
+  if ($OU -notin $ExistingOUs) {
     Write-Host "Erstelle OU: $OU"
     New-ADOrganizationalUnit -Name $OU -Path $BaseDN
-
 
 }
 else {
