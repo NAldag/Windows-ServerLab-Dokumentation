@@ -1,14 +1,16 @@
 ## Ersteinrichtung in GUI
 
-
-
 - Server VM aufgesetzt, name auf DC01 gesetzt, neustart.
-- IP festgelegt, DNS Rolle installiert.
-- Auf Domaincontroller hochgestuft.
+- IP festgelegt und bei DNS eingetragen.
+- Auf Domaincontroller hochgestuft. Installiert DNS automatisch und zwingend mit, daher Rollen installation unnötig.
 - RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar.
-- Powershell 7 per Skript auf VM Installiert.
+- Powershell 7 für Automatisierung/Remote/VS Code per Skript auf VM Installiert. AD Verwaltung erfolgt per integrierter v5.1
 
 Diese Schritte Automatisch?
+
+## Ersteinrichtung alternativ in Powershell (Work in Progress)
+
+
 
 ## SSH für Powershell(ISE)
 
@@ -25,14 +27,15 @@ Set-Service sshd -StartupType Automatic
 ```
 
 #### Troubleshooting
-AddCapability funktioniert nicht > Keine Internetverbindung
-NSlookup für google.de: 
-Server:  UnKnown
-Address: 192.168.204.10
-*** google.de wurde von UnKnown nicht gefunden: No response from server
+
+- AddCapability funktioniert nicht > Keine Internetverbindung
+- NSlookup für google.de: 
+- Server:  UnKnown
+- Address: 192.168.204.10
+- *** google.de wurde von UnKnown nicht gefunden: No response from server
 
 
-DNS löst keine externen ZOnen auf. Lösung: DNS Forwarder
+DNS löst keine externen Zonen auf. Lösung: DNS Forwarder
 DNS Manager > DC01 Eigenschaften > Weiterleitung Bearbeiten 8.8.8.8 1.1.1.1 (google und cloudflare) eingtragen
 
 Oder:
@@ -42,6 +45,9 @@ Oder:
 Add-DnsServerForwarder -IPAddress 8.8.8.8,1.1.1.1
 
 ```
+
+Achtung: Google/Cloudflare für privaten gebrauch.
+Firmenumfeld: Interner Resolver, wenn vorhanden, sonst ISP-DNS
 
 Firewall check
 
@@ -63,7 +69,7 @@ ssh -L 13389:localhost:3389 Administrator@192.168.204.10
 
 RDP auf localhost:13389 -> SSH gestützte RDP Session
 
-### VS Code
+## VS Code
 
 Powershell Extension installiert
 STRG/SHIFT + P Terminal: Set Default Profile 
@@ -80,8 +86,89 @@ Subsystem powershell "C:\Program Files\PowerShell\7\pwsh.exe" -sshs -NoLogo -NoP
 
 SSH & Enter-PSSession test: OK
 
+## Aktive Directory üver Powershell/Skript einrichten
+
+Skript: AD-Setup.ps1
+
+
+Befehle:
+
 ```powershell
 
+# Powershell lädt das AD-Modul
+Import-Module ActiveDirectory 
+
+```
+### Erstellen der OUs (Organizational Units)
+Erstellen der basis OUs: "Users,Computers,Groups,Service
+direkt unter HomeLab.local
+
+```powershell
+
+# Erstelle neue OU namens Users.
+# Path gibt an, wo das OU Objekt lebt. Hierarchische Struktur, gefolgt von Name der Domäne & TopLevelDomain.
+# DC steht NICHT für Domaincontoller, sondern DomainComponent im Active Directory Namensraum
+New-ADOrganizationalUnit -Name "Users" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "Computers" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "Groups" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "ServiceAccounts" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+
+```
+
+OUs unter Users erstellen:
+Users.HomeLab.local
+
+```powershell
+
+New-ADOrganizationalUnit -Name "IT" -Path "OU=Users,DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "Guests" -Path "OU=Users,DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+
+```
+
+OUs unter Computers erstellen:
+Computers.HomeLab.local
+
+```powershell
+
+New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+
+```
+
+OUs unter Groups erstellen
+
+```powershell
+
+New-ADOrganizationalUnit -Name "Security" -Path "OU=Groups,DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "Distribution" -Path "OU=Groups,DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
+
+```
+
+Check:
+
+```powershell
+
+Get-ADOrganizationalUnit -Filter * | Select Name, DistinguishedName
+
+
+```
+
+Anzeige: 
+
+
+Struktur:
+
+```
+
+HomeLab.local
+├── Users
+│   ├── IT
+│   └── Guests
+├── Computers
+│   └── Clients
+├── Groups
+│   ├── Security
+│   └── Distribution
+└── ServiceAccounts
 
 ```
 
