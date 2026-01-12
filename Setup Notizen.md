@@ -1,16 +1,18 @@
 ## Ersteinrichtung in GUI
 
-Idee: Automatisierung?
 
-Server VM aufgesetzt, name auf DC01 gesetzt, neustart.  
-IP festgelegt, DNS Rolle installiert.  
-Auf Domaincontroller hochgestuft.  
-RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar.  
-Powershell 7 per Skript auf VM Installiert  
+
+- Server VM aufgesetzt, name auf DC01 gesetzt, neustart.
+- IP festgelegt, DNS Rolle installiert.
+- Auf Domaincontroller hochgestuft.
+- RDP aktiviert und verbunden. GUI zum verifizieren und als Orientierungshilfe erreichbar.
+- Powershell 7 per Skript auf VM Installiert.
+
+Diese Schritte Automatisch?
 
 ## SSH für Powershell(ISE)
 
-SSH & lokales VS Code einrichten, um sichere Powershell Sitzung vom Host aus zu starten und gewohntes Arbeiten ohne Verzögerung zu ermöglichen.
+SSH & lokales VS Code einrichten, um Powershell Sitzung vom Host aus zu ermöglichen.
 
 ### Einrichten und (autom.) Starten des Dienstes auf Windows Server
 
