@@ -22,7 +22,7 @@ foreach ($ou in $BaseOUs) {
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
     if (-not $ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path $DomainDN
+        New-ADOrganizationalUnit -Name $ou -Path $DomainDN -ProtectedFromAccidentalDeletion $true
         Write-Output "OU $ou erstellt"
     } else {
         Write-Output "OU $ou existiert bereits"
@@ -33,8 +33,8 @@ foreach ($ou in $UserOUs) {
     $dn = "OU=$ou,OU=Users,$DomainDN"
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
-    if (-not($ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path "OU=Users,$DomainDN"
+    if (-not $ExistingOUs) {
+        New-ADOrganizationalUnit -Name $ou -Path "OU=Users,$DomainDN" -ProtectedFromAccidentalDeletion $true
         Write-Output "OU Users\$ou erstellt"
     }
 }
@@ -44,16 +44,16 @@ foreach ($ou in $GroupOUs) {
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
     if (-not $ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path "OU=Groups,$DomainDN"
+        New-ADOrganizationalUnit -Name $ou -Path "OU=Groups,$DomainDN" -ProtectedFromAccidentalDeletion $true
         Write-Output "OU Groups\$ou erstellt"
     }
 }
 
 # Computer-Unter-OU
 $clientsDN = "OU=Clients,OU=Computers,$DomainDN"
-$ExistingOUs = Get-ADOrganizationalUnit -Identity $clientDN -ErrorAction SilentlyContinue
+$ExistingOUs = Get-ADOrganizationalUnit -Identity $clientsDN -ErrorAction SilentlyContinue
 
 if (-not $ExistingOUs) {
-    New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,$DomainDN"
+    New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,$DomainDN" -ProtectedFromAccidentalDeletion $true
     Write-Output "OU Computers\Clients erstellt"
 }
