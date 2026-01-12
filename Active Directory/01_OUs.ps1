@@ -2,7 +2,7 @@
 $DomainDN = "DC=HomeLab,DC=local"
 
 # Sicherstellen, dass AD-Modul geladen ist
-if -not (Get-Module -ListAvailable ActiveDirectory) {
+if (-not (Get-Module -ListAvailable ActiveDirectory)) {
     Write-Error "ActiveDirectory-Modul nicht verfügbar."
     exit 1
 }
@@ -21,7 +21,7 @@ foreach ($ou in $BaseOUs) {
     $dn = "OU=$ou,$DomainDN"
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
-    if -not ($ExistingOUs) {
+    if (-not $ExistingOUs) {
         New-ADOrganizationalUnit -Name $ou -Path $DomainDN
         Write-Output "OU $ou erstellt"
     } else {
@@ -33,7 +33,7 @@ foreach ($ou in $UserOUs) {
     $dn = "OU=$ou,OU=Users,$DomainDN"
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
-    if -not ($ExistingOUs) {
+    if (-not($ExistingOUs) {
         New-ADOrganizationalUnit -Name $ou -Path "OU=Users,$DomainDN"
         Write-Output "OU Users\$ou erstellt"
     }
@@ -43,7 +43,7 @@ foreach ($ou in $GroupOUs) {
     $dn = "OU=$ou,OU=Groups,$DomainDN"
     $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
     
-    if -not ($ExistingOUs) {
+    if (-not $ExistingOUs) {
         New-ADOrganizationalUnit -Name $ou -Path "OU=Groups,$DomainDN"
         Write-Output "OU Groups\$ou erstellt"
     }
@@ -53,7 +53,7 @@ foreach ($ou in $GroupOUs) {
 $clientsDN = "OU=Clients,OU=Computers,$DomainDN"
 $ExistingOUs = Get-ADOrganizationalUnit -Identity $clientDN -ErrorAction SilentlyContinue
 
-if -not ($ExistingOUs) {
+if (-not $ExistingOUs) {
     New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,$DomainDN"
     Write-Output "OU Computers\Clients erstellt"
 }
