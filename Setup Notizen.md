@@ -12,7 +12,7 @@ Diese Schritte Automatisch?
 
 
 
-## SSH für Powershell(ISE)
+## SSH für Powershell
 
 SSH & lokales VS Code einrichten, um Powershell und SSH gestützte RDP Verbindung vom Host zu ermöglichen.
 
