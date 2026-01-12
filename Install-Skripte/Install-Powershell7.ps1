@@ -3,9 +3,11 @@
 # Version 7.5.4
 # ----------------------------------------
 
+# Getestet auf Domaincontroller-VM: Powershell 7 erfolgreich installiert.
+
 # To-do: Modifizieren als allgemeines Template für Installs
 
-# Versionsnummer und URLs
+# Versionsnummer, URL, Download-Pfad
 $pwshVersion = "7.5.4"
 $msiUrl = "https://github.com/PowerShell/PowerShell/releases/download/v$pwshVersion/PowerShell-7.5.4-win-x64.msi"
 $msiPath = "$env:TEMP\pwsh.msi"
@@ -19,7 +21,7 @@ Start-Process curl.exe -ArgumentList "-L -o `"$msiPath`" `"$msiUrl`"" -Wait
 
 # Prüfen, ob Datei existiert
 if (-Not (Test-Path $msiPath)) {
-    Write-Host " MSI-Download fehlgeschlagen. Prüfe Netzwerk / Firewall / Proxy."
+    Write-Host " MSI-Download fehlgeschlagen. Datei nicht gefunden."
     exit 1
 }
 
