@@ -37,7 +37,7 @@ DNS Manager > DC01 Eigenschaften > Weiterleitung Bearbeiten 8.8.8.8 1.1.1.1 (goo
 
 Oder:
 
-```shell
+```powershell
 
 Add-DnsServerForwarder -IPAddress 8.8.8.8,1.1.1.1
 
@@ -45,7 +45,7 @@ Add-DnsServerForwarder -IPAddress 8.8.8.8,1.1.1.1
 
 Firewall check
 
-```shell
+```powershell
 
 Get-NetFirewallRule -Name *ssh*
 
@@ -70,12 +70,12 @@ Subsystem powershell "C:\Program Files\PowerShell\7\pwsh.exe" -sshs -NoLogo -NoP
 
 SSH & Enter-PSSession test: OK
 
-```shell
+```powershell
 
 
 ```
 
-```shell
+```powershell
 
 
 
