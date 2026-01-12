@@ -73,9 +73,9 @@ RDP auf localhost:13389 -> SSH gestützte RDP Session
 
 Powershell Extension installiert
 STRG/SHIFT + P Terminal: Set Default Profile 
->Powershell 7 wählen
+Powershell 7 wählen
 Falls VS Code meldet, dass es nicht in die settings.json schreiben kann
->Syntaxfehler in settings.json hat sich bei letzter Änderung reingeschlichen: Fehlende "{"
+Syntaxfehler in settings.json hat sich bei letzter Änderung reingeschlichen: Fehlende "{"
 
 Enter-PSSession -HostName 192.168.204.10 -UserName Administrator Administrator@192.168.204.10's password: subsystem request failed on channel 0
 
