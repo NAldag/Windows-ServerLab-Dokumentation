@@ -124,13 +124,15 @@ $BaseDN = "DC=HomeLab,DC=local"
 $OUs = @("Users,Computers,Groups,Service")
 $ExistingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase $BaseDN | Select-Object -ExpandProperty Name
 
-foreach ($OU in $OUs){
-  if ($OU -notin $ExistingOUs) {
+foreach ($OU in $OUs)
+{
+  if ($OU -notin $ExistingOUs)
+  {
     Write-Host "Erstelle OU: $OU"
     New-ADOrganizationalUnit -Name $OU -Path $BaseDN
-
-}
-else {
+  }
+  else
+  {
     Write-Host "OU existiert bereits: $OU"
   }
 }
