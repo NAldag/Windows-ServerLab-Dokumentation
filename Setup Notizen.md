@@ -116,6 +116,38 @@ New-ADOrganizationalUnit -Name "ServiceAccounts" -Path "DC=HomeLab,DC=local" -Pr
 
 ```
 
+Im Skript z. B. als Schleife mit Abfrage, ob OU existiert:
+
+```powershell
+
+$BaseDN = "DC=HomeLab,DC=local"
+$OUs = @("Users,Computers,Groups,Service")
+
+foreach ($OU in $OUs){
+
+  $OUDN = "OU?$OU,$BaseDN"
+
+  if (-not (GetAdorganizationalUnit -Filter "DistinguishedName -eq '$OUdn'" -ErrorAction SilentlyContinue)) {
+    Write-Host "Erstelle OU: $OU"
+    New-ADOrganizationalUnit -Name $OU -Path $BaseDN
+
+
+}
+else {
+    Write-Host "OU existiert bereits: $OU"
+  }
+}
+
+```
+
+Alternatives, sehr lesbares Skript ohne Ausgabe:
+
+```powershell
+
+
+
+```
+
 OUs unter Users erstellen:
 Users.HomeLab.local
 
