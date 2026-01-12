@@ -137,14 +137,6 @@ else {
 
 ```
 
-Alternatives, sehr lesbares Skript ohne Ausgabe:
-
-```powershell
-
-
-
-```
-
 OUs unter Users erstellen:
 Users.HomeLab.local
 
@@ -184,8 +176,7 @@ Get-ADOrganizationalUnit -Filter * | Select Name, DistinguishedName
 
 Anzeige: 
 
-
-Struktur:
+### Struktur:
 
 ```
 
