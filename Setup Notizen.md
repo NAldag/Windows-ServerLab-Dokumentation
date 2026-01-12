@@ -12,7 +12,7 @@ Diese Schritte Automatisch?
 
 ## SSH für Powershell(ISE)
 
-SSH & lokales VS Code einrichten, um Powershell Sitzung vom Host aus zu ermöglichen.
+SSH & lokales VS Code einrichten, um Powershell und SSH gestützte RDP Verbindung vom Host zu ermöglichen.
 
 ### Einrichten und (autom.) Starten des Dienstes auf Windows Server
 
@@ -52,6 +52,16 @@ Get-NetFirewallRule -Name *ssh*
 ```
 
 Regel wird angezeigt: OK
+
+Tunnel von localhost auf RDP Port des Servers:
+
+```Poershell
+
+ssh -L 13389:localhost:3389 Administrator@192.168.204.10
+
+```
+
+RDP auf localhost:13389: SSH gestützte RDP Session
 
 ### VS Code
 
