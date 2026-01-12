@@ -2,7 +2,7 @@
 $DomainDN = "DC=HomeLab,DC=local"
 
 # Sicherstellen, dass AD-Modul geladen ist
-if -not (Get-Module -ListAvailable ActiveDirectory) {
+if (-not (Get-Module -ListAvailable ActiveDirectory)) {
     Write-Error "ActiveDirectory-Modul nicht verfügbar."
     exit 1
 }
@@ -22,7 +22,7 @@ $Users = @(
 foreach ($u in $Users) {
     $ExistingUser = Get-ADUser -Filter "SamAccountName -eq '$($u.Sam)'" -ErrorAction SilentlyContinue
 
-    if -not (ExistingUser) {
+    if (-not ExistingUser) {
         New-ADUser `
             -Name $u.Name `
             -SamAccountName $u.Sam `
