@@ -16,7 +16,8 @@ $GlobalGroups = @("GG_IT_Admins","GG_Guests")
 $DomainLocalGroups = @("DL_File_IT_RW")
 
 foreach ($g in $GlobalGroups) {
-    if (-not (Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue)) {
+    $ExistingGroup = Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue
+    if (-not $ExistingGroup) {
         New-ADGroup `
             -Name $g `
             -GroupScope Global `
@@ -27,7 +28,8 @@ foreach ($g in $GlobalGroups) {
 }
 
 foreach ($g in $DomainLocalGroups) {
-    if (-not (Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue)) {
+    $ExistingGroup = Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue
+    if (-not $ExistingGroup) {
         New-ADGroup `
             -Name $g `
             -GroupScope DomainLocal `
