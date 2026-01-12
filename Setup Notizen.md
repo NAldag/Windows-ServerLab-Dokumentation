@@ -88,8 +88,7 @@ SSH & Enter-PSSession test: OK
 
 ## Aktive Directory üver Powershell/Skript einrichten
 
-Skript: AD-Setup.ps1
-
+Robustes, reproduzierbares Setup-Skript: AD-Setup.ps1
 
 Befehle:
 
@@ -99,8 +98,10 @@ Befehle:
 Import-Module ActiveDirectory 
 
 ```
+
 ### Erstellen der OUs (Organizational Units)
-Erstellen der basis OUs: "Users,Computers,Groups,Service
+
+Erstellen der basis OUs: "Users,Computers,Groups,Service"  
 direkt unter HomeLab.local
 
 ```powershell
