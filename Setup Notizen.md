@@ -16,7 +16,7 @@ SSH & lokales VS Code einrichten, um Powershell Sitzung vom Host aus zu ermögli
 
 ### Einrichten und (autom.) Starten des Dienstes auf Windows Server
 
-```shell
+```powershell
 
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Start-Service sshd
