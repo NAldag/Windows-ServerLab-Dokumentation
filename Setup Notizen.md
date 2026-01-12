@@ -61,7 +61,7 @@ ssh -L 13389:localhost:3389 Administrator@192.168.204.10
 
 ```
 
-RDP auf localhost:13389: SSH gestützte RDP Session
+RDP auf localhost:13389 -> SSH gestützte RDP Session
 
 ### VS Code
 
