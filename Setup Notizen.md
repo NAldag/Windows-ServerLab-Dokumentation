@@ -122,7 +122,7 @@ Im Skript z. B. als Schleife mit Abfrage, ob OU existiert:
 
 $BaseDN = "DC=HomeLab,DC=local"
 $OUs = @("Users,Computers,Groups,Service")
-$ExistingOUs = Get-ADOrganizationalUnit -Filter * -SearchBase $BaseDN | Select-Object -ExpandProperty Name
+$ExistingOUs = Get-ADOrganizationalUnit -LDAPFilter "(distinguishedName=$dn)" -ErrorAction SilentlyContinue
 
 foreach ($OU in $OUs)
 {
