@@ -55,7 +55,7 @@ Regel wird angezeigt: OK
 
 Tunnel von localhost auf RDP Port des Servers:
 
-```Poershell
+```Powershell
 
 ssh -L 13389:localhost:3389 Administrator@192.168.204.10
 
