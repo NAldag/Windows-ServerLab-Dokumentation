@@ -22,9 +22,10 @@ $Users = @(
 foreach ($u in $Users) {
     $ExistingUser = Get-ADUser -Filter "SamAccountName -eq '$($u.Sam)'" -ErrorAction SilentlyContinue
 
-    if (-not ExistingUser) {
+    if (-not $ExistingUser) {
         New-ADUser `
-            -Name $u.Name `
+            -Name $u.Sam `
+            -DisplayName $u.Name `
             -SamAccountName $u.Sam `
             -UserPrincipalName "$($u.Sam)@HomeLab.local" `
             -Path "OU=$($u.OU),OU=Users,$DomainDN" `
