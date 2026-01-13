@@ -108,7 +108,7 @@ direkt unter HomeLab.local
 
 # Erstelle neue OU namens Users.
 # Path gibt an, wo das OU Objekt lebt. Hierarchische Struktur, gefolgt von Name der Domäne & TopLevelDomain.
-# DC steht NICHT für Domaincontoller, sondern DomainComponent im Active Directory Namensraum
+# DC steht für DomainComponent im Active Directory Namensraum
 New-ADOrganizationalUnit -Name "Users" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
 New-ADOrganizationalUnit -Name "Computers" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
 New-ADOrganizationalUnit -Name "Groups" -Path "DC=HomeLab,DC=local" -ProtectedFromAccidentalDeletion $true
