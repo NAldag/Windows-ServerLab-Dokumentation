@@ -41,8 +41,6 @@ Get-ADOrganizationalUnit -Identity OU=Clients,OU=Computers,DC=HomeLab,DC=local -
 
 New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,$DomainDN" -ProtectedFromAccidentalDeletion $true
 
-```
-
 Globale Variable für DC=HomeLab,DC=local = $DomainDN
 
 # Erstellen eines Skripts für Benutzererstellung
