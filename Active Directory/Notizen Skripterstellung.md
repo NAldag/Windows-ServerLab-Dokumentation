@@ -57,6 +57,10 @@ Name: "Guest User"
 SAM: "guest.user"
 OU: "Guests"
 
+Passwort als SecureString
+
+$SecurePW = ConvertTo-SecureString "Start!123" -AsPlainText -Force
+
 Array array: @(@{Name="IT Admin; Sam="it.admin"; OU="IT"},@{...})
 = $Users
 
@@ -79,7 +83,7 @@ In Variable $ExistingUser
             -DisplayName IT Admin `
             -SamAccountName it.admin `
             -UserPrincipalName "it.admin@HomeLab.local" `
-            -Path "OU=$($u.OU),OU=Users,$DomainDN" `
+            -Path "OU=IT,OU=Users,DC=HomeLab,DC=local" `
             -AccountPassword $SecurePW `
             -Enabled $true `
             -ChangePasswordAtLogon $true
