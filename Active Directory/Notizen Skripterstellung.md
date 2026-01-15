@@ -1,5 +1,8 @@
 # Skript zur Erstellung praxisnaher OUs
 
+Variable für Domainbasis
+/$DomainDN = "DC=HomeLab,DC=local"
+
 ## Eingabedaten
 
 Basis OUS: "Users","Computers","Groups","ServiceAccounts"
@@ -94,10 +97,6 @@ else:
 Write-Output "User X existiert bereits
 
 # Erstellen eines Skripts für Globale und Domain Local Gruppen nach AGDLP
-
-Variable für Domainbasis
-
-/$DomainDN = "DC=HomeLab,DC=local"
 
 ## Abfrage, ob AD Modul geladen ist
 
