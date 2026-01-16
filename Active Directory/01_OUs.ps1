@@ -5,6 +5,8 @@
 # Zeitauflösung(pragmatisch): Minimales Delay nach Parent Erstellung, nicht garantiert: Start-Sleep -Milliseconds 500
 # Zeitauflösung(langfristig): Hilfsfunktion Wait-ForOU. Aufwändiger, aber erstlauf Garantie.
 
+# Durchgeführt: Namensänderungen, Try Catch bei Erstellung statt IF, Wait 500 ms nach Parent Erstellung
+# Text: 
 
 $DomainDN = "DC=HomeLab,DC=local"
 
@@ -24,49 +26,45 @@ $GroupOUs = @("Security","Distribution")
 
 
 foreach ($ou in $BaseOUs) {
-    $dn = "OU=$ou,$DomainDN"
-    $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
-    
-    if (-not $ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path $DomainDN -ProtectedFromAccidentalDeletion $true
+    try {
+        New-ADOrganizationalUnit -Name $ou -Path $DomainDN -ProtectedFromAccidentalDeletion $true -ErrorAction Stop
         Write-Output "OU $ou erstellt"
-    } else {
-        Write-Output "OU $ou existiert bereits"
-    }
+        }
+    catch{
+        Write-Output "OU $ou existiert oder Parent noch nicht bereit"
+        }
+    
 }
 
 Start-Sleep -Milliseconds 500
-
 
 foreach ($ou in $UserOUs) {
-    $dn = "OU=$ou,OU=Users,$DomainDN"
-    $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
-    
-    if (-not $ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path "OU=Users,$DomainDN" -ProtectedFromAccidentalDeletion $true
-        Write-Output "OU Users\$ou erstellt"
-    }
+    try {
+        New-ADOrganizationalUnit -Name $ou -Path "OU=LabUsers,$DomainDN" -ProtectedFromAccidentalDeletion $true -ErrorAction Stop
+        Write-Output "OU LabUsers\$ou erstellt"
+        }
+    catch {
+        Write-Output "OU LabUsers\$ou existiert oder Parent noch nicht bereit"
+        }
 }
 
-Start-Sleep -Milliseconds 500
-
 foreach ($ou in $GroupOUs) {
-    $dn = "OU=$ou,OU=Groups,$DomainDN"
-    $ExistingOUs = Get-ADOrganizationalUnit -Identity $dn -ErrorAction SilentlyContinue
-    
-    if (-not $ExistingOUs) {
-        New-ADOrganizationalUnit -Name $ou -Path "OU=Groups,$DomainDN" -ProtectedFromAccidentalDeletion $true
+    try {
+        New-ADOrganizationalUnit -Name $ou -Path "OU=Groups,$DomainDN" -ProtectedFromAccidentalDeletion $true -ErrorAction Stop
         Write-Output "OU Groups\$ou erstellt"
-    }
+        }
+    catch {
+        Write-Output "OU Groups\$ou existiert oder Parent noch nicht bereit"
+         }
 }
 
 Start-Sleep -Milliseconds 500
 
 # Computer-Unter-OU
-$clientsDN = "OU=Clients,OU=Computers,$DomainDN"
+$clientsDN = "OU=Clients,OU=LabComputers,$DomainDN"
 $ExistingOUs = Get-ADOrganizationalUnit -Identity $clientsDN -ErrorAction SilentlyContinue
 
 if (-not $ExistingOUs) {
-    New-ADOrganizationalUnit -Name "Clients" -Path "OU=Computers,$DomainDN" -ProtectedFromAccidentalDeletion $true
-    Write-Output "OU Computers\Clients erstellt"
+    New-ADOrganizationalUnit -Name "Clients" -Path "OU=LabComputers,$DomainDN" -ProtectedFromAccidentalDeletion $true -ErrorAction Stop
+    Write-Output "OU LabComputers\Clients erstellt"
 }
