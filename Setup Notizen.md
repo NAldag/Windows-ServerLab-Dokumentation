@@ -88,7 +88,7 @@ SSH & Enter-PSSession test: OK
 
 ## Aktive Directory üver Powershell/Skript einrichten
 
-Robustes, reproduzierbares Setup-Skript: AD-Setup.ps1
+Als robuste, reproduzierbare Setup-Skripte im Active Directory Unterordner.
 
 Befehle:
 
