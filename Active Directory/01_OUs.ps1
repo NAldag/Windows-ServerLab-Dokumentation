@@ -5,7 +5,11 @@
 # Zeitauflösung(pragmatisch): Minimales Delay nach Parent Erstellung, nicht garantiert: Start-Sleep -Milliseconds 500
 # Zeitauflösung(langfristig): Hilfsfunktion Wait-ForOU. Aufwändiger, aber erstlauf Garantie.
 
-# Durchgeführt: Namensänderungen, Try Catch bei Erstellung statt IF, Wait 500 ms nach Parent Erstellung
+# Durchgeführt:
+# - Namensänderungen, 
+# - Try Catch bei Erstellung statt IF mit ErrorAction Stop zum forcieren eines terminierten Errors, den Catch abfanen kann, 
+# - Wait 500 ms nach Parent Erstellung
+
 # Test: OK, erwartete Ausgabe, Struktur wie gewünscht erstellt.
 
 $DomainDN = "DC=HomeLab,DC=local"
