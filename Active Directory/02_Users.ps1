@@ -9,7 +9,7 @@ if (-not (Get-Module -ListAvailable ActiveDirectory)) {
 Import-Module ActiveDirectory
 
 # 02_Users.ps1
-# Test:
+# Test: OK, User it.admin erstellt User guest.user erstellt
 # Erstellt Benutzerkonten
 
 $SecurePW = ConvertTo-SecureString "Start!123" -AsPlainText -Force
