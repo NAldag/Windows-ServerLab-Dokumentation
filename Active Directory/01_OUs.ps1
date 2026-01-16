@@ -61,10 +61,10 @@ foreach ($ou in $GroupOUs) {
 Start-Sleep -Milliseconds 500
 
 # Computer-Unter-OU
-$clientsDN = "OU=Clients,OU=LabComputers,$DomainDN"
-$ExistingOUs = Get-ADOrganizationalUnit -Identity $clientsDN -ErrorAction SilentlyContinue
-
-if (-not $ExistingOUs) {
+try {
     New-ADOrganizationalUnit -Name "Clients" -Path "OU=LabComputers,$DomainDN" -ProtectedFromAccidentalDeletion $true -ErrorAction Stop
     Write-Output "OU LabComputers\Clients erstellt"
-}
+    }
+catch {
+    Write-Output "OU Clients existiert oder Parent noch nicht bereit"
+    }    
