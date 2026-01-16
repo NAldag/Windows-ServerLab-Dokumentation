@@ -20,20 +20,22 @@ $Users = @(
 )
 
 foreach ($u in $Users) {
-    $ExistingUser = Get-ADUser -Filter "SamAccountName -eq '$($u.Sam)'" -ErrorAction SilentlyContinue
 
-    if (-not $ExistingUser) {
+
+    try {
         New-ADUser `
             -Name $u.Sam `
             -DisplayName $u.Name `
             -SamAccountName $u.Sam `
             -UserPrincipalName "$($u.Sam)@HomeLab.local" `
-            -Path "OU=$($u.OU),OU=Users,$DomainDN" `
+            -Path "OU=$($u.OU),OU=LabUsers,$DomainDN" `
             -AccountPassword $SecurePW `
             -Enabled $true `
-            -ChangePasswordAtLogon $true
+            -ChangePasswordAtLogon $true `
+            -ErrorAction Stop
         Write-Output "User $($u.Sam) erstellt"
-    } else {
+    } 
+    catch {
         Write-Output "User $($u.Sam) existiert bereits"
     }
 }
