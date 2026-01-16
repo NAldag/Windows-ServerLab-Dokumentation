@@ -20,8 +20,6 @@ $Users = @(
 )
 
 foreach ($u in $Users) {
-
-
     try {
         New-ADUser `
             -Name $u.Sam `
