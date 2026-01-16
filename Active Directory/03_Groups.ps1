@@ -16,25 +16,31 @@ $GlobalGroups = @("GG_IT_Admins","GG_Guests")
 $DomainLocalGroups = @("DL_File_IT_RW")
 
 foreach ($g in $GlobalGroups) {
-    $ExistingGroup = Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue
-    if (-not $ExistingGroup) {
+    try {
         New-ADGroup `
             -Name $g `
             -GroupScope Global `
             -GroupCategory Security `
-            -Path "OU=Security,OU=Groups,$DomainDN"
+            -Path "OU=Security,OU=Groups,$DomainDN" `
+            -ErrorAction Stop
         Write-Output "Globale Gruppe $g erstellt"
+    }
+    catch{
+        Write-Output "Globale Gruppe $g bereits vorhanden"
     }
 }
 
 foreach ($g in $DomainLocalGroups) {
-    $ExistingGroup = Get-ADGroup -Filter "Name -eq '$g'" -ErrorAction SilentlyContinue
-    if (-not $ExistingGroup) {
+    try {
         New-ADGroup `
             -Name $g `
             -GroupScope DomainLocal `
             -GroupCategory Security `
-            -Path "OU=Security,OU=Groups,$DomainDN"
+            -Path "OU=Security,OU=Groups,$DomainDN" `
+            -ErrorAction Stop
         Write-Output "Domain Local Gruppe $g erstellt"
+    }
+    Catch{
+        Write-Output "Domain Local Gruppe $g bereits vorhanden"
     }
 }
