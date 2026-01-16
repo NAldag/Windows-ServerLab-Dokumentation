@@ -10,3 +10,6 @@ Start-Sleep -Seconds 1
 
 # 3. Gruppen erstellen
 .\03_Groups.ps1
+
+# 4. Validierung
+.\04_Validation.ps1
