@@ -6,7 +6,7 @@
 # Zeitauflösung(langfristig): Hilfsfunktion Wait-ForOU. Aufwändiger, aber erstlauf Garantie.
 
 # Durchgeführt: Namensänderungen, Try Catch bei Erstellung statt IF, Wait 500 ms nach Parent Erstellung
-# Text: 
+# Test: OK, erwartete Ausgabe, Struktur wie gewünscht erstellt.
 
 $DomainDN = "DC=HomeLab,DC=local"
 
